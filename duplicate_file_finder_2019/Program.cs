@@ -35,15 +35,24 @@ namespace duplicate_file_finder_2019
 
             foreach (KeyValuePair<String, List<String> > kvp in hashes)
             {
-                Console.WriteLine("\n" + kvp.Key + "\n");
 
-                List<String> locations = kvp.Value;
+                //if(kvp.Value)
 
-                foreach(String location in locations)
+                
+                
+
+                if(kvp.Value.Count>1)
                 {
 
-                    Console.WriteLine("          -------------   " + location);
+                    List<String> locations = kvp.Value;
+                    Console.WriteLine("\n" + kvp.Key + "\n");
 
+                    foreach (String location in locations)
+                    {
+
+                        Console.WriteLine("          -------------   " + location);
+
+                    }
                 }
 
 
