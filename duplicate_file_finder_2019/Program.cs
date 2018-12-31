@@ -18,6 +18,7 @@ namespace duplicate_file_finder_2019
 
 
         static Dictionary<String, List<String>> hashes = new Dictionary<string, List<String>> { };
+        static Dictionary<String, List<String>> newHashes = new Dictionary<string, List<String>> { };
 
 
         static void Main(String[] args)
@@ -50,7 +51,14 @@ namespace duplicate_file_finder_2019
                         Console.WriteLine("          -------------   " + location);
 
                     }
+
+
+                    newHashes[kvp.Key] = kvp.Value;
+
                 }
+
+
+                
 
 
 
@@ -68,7 +76,7 @@ namespace duplicate_file_finder_2019
 
 
 
-            myCurrentKey = hashes.Keys.First();
+            myCurrentKey = newHashes.Keys.First();
 
             ConsoleKeyInfo cki;
             while (true)
@@ -80,7 +88,7 @@ namespace duplicate_file_finder_2019
 
                     //Console.Clear();
 
-                    List<String> data = hashes[myCurrentKey];
+                    List<String> data = newHashes[myCurrentKey];
 
                     Console.WriteLine("---------------------------------");
 
@@ -99,7 +107,7 @@ namespace duplicate_file_finder_2019
                     //Console.Clear();
                     Console.WriteLine("---------------------------------");
 
-                    List<String> data = hashes[myCurrentKey];
+                    List<String> data = newHashes[myCurrentKey];
 
 
                     foreach (String datum in data)
@@ -124,13 +132,13 @@ namespace duplicate_file_finder_2019
         private static void MoveIndex(int dir)
         { 
 
-            List<string> keys = new List<string>(hashes.Keys);
+            List<string> keys = new List<string>(newHashes.Keys);
             int newIndex = keys.IndexOf(myCurrentKey) - dir;
             if (newIndex < 0)
             {
-                newIndex = hashes.Count - 1;
+                newIndex = newHashes.Count - 1;
             }
-            else if (newIndex > hashes.Count - 1)
+            else if (newIndex > newHashes.Count - 1)
             {
                 newIndex = 0;
             }
