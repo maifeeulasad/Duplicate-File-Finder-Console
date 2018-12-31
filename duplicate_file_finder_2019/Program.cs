@@ -12,8 +12,9 @@ namespace duplicate_file_finder_2019
 
     {
 
+        public static string myCurrentKey = "";
 
-      
+
 
 
         static Dictionary<String, List<String>> hashes = new Dictionary<string, List<String>> { };
@@ -25,7 +26,7 @@ namespace duplicate_file_finder_2019
 
             //Console.ForegroundColor(new ConsoleColor(10));
 
-            travarse("D:\\");
+            travarse("D:\\models");
 
             for(int i=0;i<3;i++)
                 Console.Beep();
@@ -35,12 +36,8 @@ namespace duplicate_file_finder_2019
 
             foreach (KeyValuePair<String, List<String> > kvp in hashes)
             {
-
-                //if(kvp.Value)
-
                 
                 
-
                 if(kvp.Value.Count>1)
                 {
 
@@ -66,11 +63,80 @@ namespace duplicate_file_finder_2019
 
 
             Console.ReadKey();
+            //Console.Clear();
+
+
+
+
+            myCurrentKey = hashes.Keys.First();
+
+            ConsoleKeyInfo cki;
+            while (true)
+            {
+                cki = Console.ReadKey();
+                if (cki.Key == ConsoleKey.LeftArrow)
+                {
+                    MoveIndex(-1);
+
+                    //Console.Clear();
+
+                    List<String> data = hashes[myCurrentKey];
+
+                    Console.WriteLine("---------------------------------");
+
+                    foreach (String datum in data)
+                    {
+                        Console.WriteLine(datum);
+                    }
+
+                    Console.WriteLine("---------------------------------");
+
+                    //Console.ReadKey();
+                }
+                else if (cki.Key == ConsoleKey.RightArrow)
+                {
+                    MoveIndex(1);
+                    //Console.Clear();
+                    Console.WriteLine("---------------------------------");
+
+                    List<String> data = hashes[myCurrentKey];
+
+
+                    foreach (String datum in data)
+                    {
+                        Console.WriteLine(datum);
+                    }
+
+                    Console.WriteLine("---------------------------------");
+
+                    //Console.ReadKey();
+                }
+            }
+
+
+            
+
+
 
         }
 
 
+        private static void MoveIndex(int dir)
+        { 
 
+            List<string> keys = new List<string>(hashes.Keys);
+            int newIndex = keys.IndexOf(myCurrentKey) - dir;
+            if (newIndex < 0)
+            {
+                newIndex = hashes.Count - 1;
+            }
+            else if (newIndex > hashes.Count - 1)
+            {
+                newIndex = 0;
+            }
+
+            myCurrentKey = keys[newIndex];
+        }
 
 
 
