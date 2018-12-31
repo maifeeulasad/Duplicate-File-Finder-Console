@@ -13,9 +13,7 @@ namespace duplicate_file_finder_2019
     {
 
         public static string myCurrentKey = "";
-
-
-
+        
 
         static Dictionary<String, List<String>> hashes = new Dictionary<string, List<String>> { };
         static Dictionary<String, List<String>> newHashes = new Dictionary<string, List<String>> { };
@@ -24,16 +22,13 @@ namespace duplicate_file_finder_2019
         static void Main(String[] args)
         {
 
+         
 
-            //Console.ForegroundColor(new ConsoleColor(10));
-
-            travarse("D:\\models");
+            travarse("D:\\");
 
             for(int i=0;i<3;i++)
                 Console.Beep();
-
-
-
+            
 
             foreach (KeyValuePair<String, List<String> > kvp in hashes)
             {
@@ -56,12 +51,7 @@ namespace duplicate_file_finder_2019
                     newHashes[kvp.Key] = kvp.Value;
 
                 }
-
-
                 
-
-
-
 
             }
 
@@ -69,12 +59,8 @@ namespace duplicate_file_finder_2019
                 Console.Beep();
 
 
-
+   
             Console.ReadKey();
-            //Console.Clear();
-
-
-
 
             myCurrentKey = newHashes.Keys.First();
 
@@ -121,11 +107,6 @@ namespace duplicate_file_finder_2019
                 }
             }
 
-
-            
-
-
-
         }
 
 
@@ -145,10 +126,7 @@ namespace duplicate_file_finder_2019
 
             myCurrentKey = keys[newIndex];
         }
-
-
-
-
+        
         static void travarse(String workingDirectory)
         {
             try
@@ -172,8 +150,6 @@ namespace duplicate_file_finder_2019
         
                 foreach (String subDirectory in subDirectories)
                 {
-
-                    
 
                     Console.WriteLine(" +++++++++ " + subDirectory);
 
@@ -199,8 +175,6 @@ namespace duplicate_file_finder_2019
 
 
                     //Console.Beep();
-
-
 
                     String hashString = BitConverter.ToString(hash);
 
@@ -229,11 +203,6 @@ namespace duplicate_file_finder_2019
                 }
             }
         }
-
-
         
-
-
-
     }
 }
